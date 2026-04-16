@@ -14,24 +14,28 @@ USRDB-Tariff-Archetype-Library/
 ├── README.md
 ├── requirements.txt
 ├── LICENSE
-├── archetypes/                  # Machine-readable archetype JSON files
-│   ├── demand/                  # TOU demand-charge archetypes (4 clusters)
-│   ├── energy_1period/          # One-period energy-rate archetypes (6 clusters)
-│   ├── energy_2period/          # Two-period energy-rate archetypes (6 clusters)
-│   ├── energy_3period/          # Three-period energy-rate archetypes (5 clusters)
-│   ├── energy_4plus_period/     # Four+-period energy-rate archetypes (5 clusters)
-│   └── flat_demand/             # Flat demand month-partition patterns (10 patterns)
-├── pipeline/                    # USRDB-to-archetype processing code
+├── archetypes/                          # Machine-readable archetype JSON files
+│   ├── archetype_schema.json
+│   ├── flat_demand_patterns.json
+│   ├── demand_rate_archetypes/          # TOU demand-charge archetypes
+│   │   ├── archetype_01_moderate_tou.json
+│   │   ├── archetype_02_high_cost_steep.json
+│   │   ├── archetype_03_moderate_seasonal.json
+│   │   └── archetype_04_low_cost_flat.json
+│   └── energy_rate_archetypes/          # Energy-rate archetypes grouped by number of periods
+│       ├── Period_1/
+│       ├── Period_2/
+│       ├── Period_3/
+│       └── Period_4Plus/
+├── pipeline/                            # USRDB-to-archetype processing code
 │   ├── __init__.py
-│   ├── usrdb_parser.py          # Step 1: Parse USRDB CSV into tidy long tables
-│   ├── load_and_merge.py        # Step 2: Load data, merge with EIA utility metadata
-│   ├── feature_extraction.py    # Step 3: Compute per-period pricing features
-│   ├── segmentation_clustering.py # Step 4a: Rule-based + DBSCAN period segmentation
-│   └── pricing_clustering.py    # Step 4b: k-means pricing archetype derivation
-├── billing_engine/              # Reference billing implementation (TODO)
-│   └── billing.py
-└── examples/
-    └── quickstart.ipynb         # Walkthrough notebook (TODO)
+│   ├── usrdb_parser.py                  # Step 1: Parse USRDB CSV into tidy long tables
+│   ├── load_and_merge.py                # Step 2: Load data and merge with utility metadata
+│   ├── feature_extraction.py            # Step 3: Compute pricing features
+│   ├── segmentation_clustering.py       # Step 4a: Period segmentation
+│   └── pricing_clustering.py            # Step 4b: Pricing archetype derivation
+└── billing_engine/                      # Reference billing implementation
+    └── billing.py
 ```
 
 ## Quick Start
