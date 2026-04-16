@@ -10,7 +10,7 @@ This repository accompanies the paper:
 ## Repository Structure
 
 ```
-usrdb-tariff-archetypes/
+USRDB-Tariff-Archetype-Library/
 ├── README.md
 ├── requirements.txt
 ├── LICENSE
@@ -37,10 +37,11 @@ usrdb-tariff-archetypes/
 ## Quick Start
 
 ### Installation
+**Note:** The USRDB dataset is not included in this repository and must be obtained separately from the OpenEI Utility Rate Database.
 
 ```bash
-git clone https://github.com/<your-org>/usrdb-tariff-archetypes.git
-cd usrdb-tariff-archetypes
+git clone https://github.com/Armin-Khazaei/USRDB-Tariff-Archetype-Library.git
+cd USRDB-Tariff-Archetype-Library
 pip install -r requirements.txt
 ```
 
@@ -56,7 +57,8 @@ from pipeline import (
 )
 
 # Step 1: Load raw USRDB CSV
-df = load_usrdb("data/usurdb.csv")
+# Replace with your local path to the USRDB dataset
+df = load_usrdb("path/to/usrdb.csv")
 
 # Step 2: Parse into tidy long tables
 tiers_long, flat_months, summary = parse_usrdb_all(df)
