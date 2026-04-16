@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "USRDB Tariff Archetype",
+  "description": "Machine-readable representation of a representative tariff archetype derived from USRDB clustering.",
+  "type": "object",
+  "required": ["archetype_id", "category", "cluster_id", "periods", "unit"],
+  "properties": {
+    "archetype_id": {
+      "type": "string",
+      "description": "Unique identifier, e.g. 'demand_01', 'energy_2p_03'"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["tou_demand", "flat_demand", "energy_1period", "energy_2period", "energy_3period", "energy_4plus"]
+    },
+    "cluster_id": {
+      "type": "integer",
+      "description": "Cluster number from k-means or DBSCAN (1-based)"
+    },
+    "cluster_share": {
+      "type": "number",
+      "description": "Fraction of plans in this cluster (0-1)"
+    },
+    "description": {
+      "type": "string"
+    },
+    "representative_plan": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "state": {"type": "string"},
+        "usrdb_label": {"type": ["string", "null"]}
+      }
+    },
+    "period_map": {
+      "type": "object",
+      "description": "12x24 month-hour matrices mapping to period indices. null if single-period.",
+      "properties": {
+        "weekday": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 24,
+            "maxItems": 24
+          },
+          "minItems": 12,
+          "maxItems": 12
+        },
+        "weekend": {
+          "type": ["array", "null"]
+        }
+      }
+    },
+    "periods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["period_index", "tiers"],
+        "properties": {
+          "period_index": {"type": "integer"},
+          "label": {"type": "string"},
+          "tiers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["rate"],
+              "properties": {
+                "rate": {"type": ["number", "null"]},
+                "max": {"type": ["number", "null"], "description": "Upper bound in kWh or kW. null = unlimited."},
+                "adj": {"type": "number", "default": 0.0}
+              }
+            }
+          }
+        }
+      }
+    },
+    "unit": {
+      "type": "string",
+      "description": "Pricing unit: $/kWh for energy, $/kW or $/kVA for demand"
+    },
+    "key_states": {
+      "type": "object",
+      "properties": {
+        "by_count": {"type": "array", "items": {"type": "string"}},
+        "by_share": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

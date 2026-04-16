@@ -1,0 +1,51 @@
+{
+  "archetype_id": "energy_1p_04",
+  "category": "energy_1period",
+  "cluster_id": 4,
+  "cluster_share": 0.014,
+  "description": "Very high-cost category observed in non-contiguous or island jurisdictions; shows modest tier decline but extreme absolute cost levels.",
+  "representative_plan": {
+    "name": "I-N-N Electric Coop, Inc, Community Facility",
+    "state": "AK",
+    "eia_id": 9188
+  },
+  "period_map": {
+    "weekday": null,
+    "weekend": null
+  },
+  "periods": [
+    {
+      "period_index": 0,
+      "label": "all-hours",
+      "tiers": [
+        {
+          "rate": 0.4,
+          "max": 1000,
+          "adj": 0.12
+        },
+        {
+          "rate": 0.37,
+          "max": 15000,
+          "adj": 0.12
+        },
+        {
+          "rate": 0.3187,
+          "max": null,
+          "adj": 0.12
+        }
+      ]
+    }
+  ],
+  "unit": "$/kWh",
+  "key_states": {
+    "by_count": [
+      "AK",
+      "HI",
+      "TX"
+    ],
+    "by_share": [
+      "AK",
+      "HI"
+    ]
+  }
+}
